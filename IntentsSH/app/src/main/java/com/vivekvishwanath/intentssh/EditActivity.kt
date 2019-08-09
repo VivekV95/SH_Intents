@@ -10,7 +10,7 @@ class EditActivity : AppCompatActivity() {
 
     companion object {
         const val IMAGE_REQUEST_CODE = 11
-}
+    }
 
     private var imageData = ImageData()
 
@@ -22,6 +22,14 @@ class EditActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
             intent.type = "image/*"
             startActivityForResult(intent, IMAGE_REQUEST_CODE)
+        }
+
+        save_button.setOnClickListener {
+            imageData.name = image_name.text.toString()
+            val intent = Intent()
+            intent.putExtra(ImageData.IMAGE_TAG, imageData)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         }
     }
 
