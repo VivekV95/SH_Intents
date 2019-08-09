@@ -18,6 +18,13 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
+        val extra = intent.getSerializableExtra(ImageData.IMAGE_TAG)
+        if (extra != null) {
+            imageData = extra as ImageData
+            image_view.setImageURI(imageData.getUri())
+            image_name.setText(imageData.name)
+        }
+
         find_image_button.setOnClickListener {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
             intent.type = "image/*"

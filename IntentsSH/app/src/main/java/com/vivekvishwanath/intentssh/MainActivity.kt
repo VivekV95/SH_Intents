@@ -31,6 +31,12 @@ class MainActivity : AppCompatActivity() {
         textview.textSize = 20f
         textview.text = imageData.name
 
+        textview.setOnClickListener {
+            val intent = Intent(this, EditActivity::class.java)
+            intent.putExtra(ImageData.IMAGE_TAG, imageData)
+            startActivityForResult(intent, ADD_IMAGE_CODE)
+        }
+
         return textview
     }
 
@@ -45,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == ADD_IMAGE_CODE && resultCode == Activity.RESULT_OK) {
             val imageData = data?.getSerializableExtra(ImageData.IMAGE_TAG) as ImageData
             imageList.add(imageData)
+            populateList(imageList.size - 1)
         }
     }
 }
